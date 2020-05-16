@@ -447,6 +447,7 @@ packages:
     action: install
     variants:
     - cloud
+    - xfce
 
   - packages:
     - acpid
@@ -511,6 +512,12 @@ packages:
     action: remove
     types:
     - vm
+
+  - packages:
+    - xubuntu-desktop
+    action: install
+    variants:
+    - xfce
 
   repositories:
   - name: sources.list
