@@ -384,21 +384,25 @@ files:
   generator: cloud-init
   variants:
   - cloud
+  - xfce
 
 - name: network-config
   generator: cloud-init
   variants:
   - cloud
+  - xfce
 
 - name: user-data
   generator: cloud-init
   variants:
   - cloud
+  - xfce
 
 - name: vendor-data
   generator: cloud-init
   variants:
   - cloud
+  - xfce
 
 - name: ext4
   generator: fstab
