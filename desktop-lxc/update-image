@@ -37,11 +37,18 @@ mkdir -p "$LXD_IMAGE_PATH"
 
 cd "$LXD_IMAGE_PATH"
 echo "$LXD_IMAGE_PATH: Build..."
-sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
-    -o image.release="$LXD_IMAGE_RELEASE" \
-    -o image.architecture="$LXD_IMAGE_ARCH" \
-    -o image.variant="$LXD_IMAGE_VARIANT" \
-    -o source.url="http://us.archive.ubuntu.com/ubuntu"
+if [ "$LXD_IMAGE_OS" == "ubuntu" ]; then
+    sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
+        -o image.release="$LXD_IMAGE_RELEASE" \
+        -o image.architecture="$LXD_IMAGE_ARCH" \
+        -o image.variant="$LXD_IMAGE_VARIANT" \
+        -o source.url="http://us.archive.ubuntu.com/ubuntu"
+else
+    sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
+        -o image.release="$LXD_IMAGE_RELEASE" \
+        -o image.architecture="$LXD_IMAGE_ARCH" \
+        -o image.variant="$LXD_IMAGE_VARIANT"
+fi
 cd "$TMP_DIR"
 
 echo "$LXD_IMAGE_PATH: Upload..."
