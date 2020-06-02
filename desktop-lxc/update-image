@@ -37,7 +37,7 @@ mkdir -p "$LXD_IMAGE_PATH"
 
 cd "$LXD_IMAGE_PATH"
 echo "$LXD_IMAGE_PATH: Build..."
-if [ "$LXD_IMAGE_OS" == "ubuntu" ]; then
+if [ "$LXD_IMAGE_OS" = "ubuntu" ]; then
     sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
         ${LXD_IMAGE_ARCH} \
         -o image.release="$LXD_IMAGE_RELEASE" \
