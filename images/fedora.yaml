@@ -137,6 +137,9 @@ files:
     WantedBy=default.target
   variants:
   - cloud
+  - gnome
+  - kde
+  - xfce
   types:
   - container
 
@@ -144,21 +147,33 @@ files:
   generator: cloud-init
   variants:
   - cloud
+  - gnome
+  - kde
+  - xfce
 
 - name: network-config
   generator: cloud-init
   variants:
   - cloud
+  - gnome
+  - kde
+  - xfce
 
 - name: user-data
   generator: cloud-init
   variants:
   - cloud
+  - gnome
+  - kde
+  - xfce
 
 - name: vendor-data
   generator: cloud-init
   variants:
   - cloud
+  - gnome
+  - kde
+  - xfce
 
 - generator: lxd-agent
   types:
@@ -202,6 +217,27 @@ packages:
     action: install
     variants:
     - cloud
+    - gnome
+    - kde
+    - xfce
+
+  - packages:
+    - @gnome-desktop
+    action: install
+    variants:
+    - gnome
+
+  - packages:
+    - @kde-desktop
+    action: install
+    variants:
+    - kde
+
+  - packages:
+    - @xfce-desktop-environment
+    action: install
+    variants:
+    - xfce
 
   - packages:
     - libsss_idmap
@@ -260,6 +296,7 @@ actions:
     systemctl enable cloud-final
   variants:
   - cloud
+  - xfce
 
 - trigger: post-unpack
   action: |-
@@ -304,5 +341,6 @@ actions:
     systemctl enable network-device-down.service
   variants:
   - cloud
+  - xfce
   types:
   - container
