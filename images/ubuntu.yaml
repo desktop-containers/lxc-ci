@@ -385,24 +385,32 @@ files:
   variants:
   - cloud
   - xfce
+  - gnome
+  - kde
 
 - name: network-config
   generator: cloud-init
   variants:
   - cloud
   - xfce
+  - gnome
+  - kde
 
 - name: user-data
   generator: cloud-init
   variants:
   - cloud
   - xfce
+  - gnome
+  - kde
 
 - name: vendor-data
   generator: cloud-init
   variants:
   - cloud
   - xfce
+  - gnome
+  - kde
 
 - name: ext4
   generator: fstab
@@ -452,6 +460,8 @@ packages:
     variants:
     - cloud
     - xfce
+    - gnome
+    - kde
 
   - packages:
     - acpid
@@ -522,6 +532,18 @@ packages:
     action: install
     variants:
     - xfce
+
+  - packages:
+    - ubuntu-desktop
+    action: install
+    variants:
+    - gnome
+
+  - packages:
+    - kubuntu-desktop
+    action: install
+    variants:
+    - kde
 
   repositories:
   - name: sources.list
