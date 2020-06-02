@@ -45,13 +45,14 @@ sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
 cd "$TMP_DIR"
 
 echo "$LXD_IMAGE_PATH: Upload..."
-scp -r "$LXD_IMAGE_PATH/lxd.tar.xz" $LXD_USER@$LXD_IMAGE_SERVER_HOST:"/var/www/simplestreams/images/$LXD_IMAGE_PATH/lxd.tar.xz"
-scp -r "$LXD_IMAGE_PATH/rootfs.squashfs" $LXD_USER@$LXD_IMAGE_SERVER_HOST:"/var/www/simplestreams/images/$LXD_IMAGE_PATH/rootfs.squashfs"
+rsync -r "$TMP_DIR/*" $LXD_USER@$LXD_IMAGE_SERVER_HOST:"/var/www/simplestreams/images/"
 
 cd /tmp
 sudo rm -rf "$TMP_DIR"
 
 echo "$LXD_IMAGE_PATH: Index..."
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
 ssh $LXD_USER@$LXD_IMAGE_SERVER_HOST lxd-image-server update
 
 echo "$LXD_IMAGE_PATH: Success."
