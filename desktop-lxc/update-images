@@ -31,4 +31,5 @@ cd "$TMP_DIR"
 scp -r "$LXD_IMAGE_PATH/lxd.tar.gz" $LXD_USER@$LXD_IMAGE_SERVER_HOST:/var/www/simplestreams/images/
 scp -r "$LXD_IMAGE_PATH/rootfs.squashfs" $LXD_USER@$LXD_IMAGE_SERVER_HOST:/var/www/simplestreams/images/
 
-sudo rm -rf "$LXD_IMAGE_OS"
+cd /
+sudo rm -rf "$TMP_DIR"
