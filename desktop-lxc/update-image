@@ -1,0 +1,47 @@
+#!/bin/bash
+set -e
+
+#
+# Usage:    update-image <os> <release> <arch> <variant>
+#
+LXD_USER=lxdadm
+LXD_IMAGE_OS=$1
+LXD_IMAGE_RELEASE=$2
+LXD_IMAGE_ARCH=$3
+LXD_IMAGE_VARIANT=$4
+
+if [ "$USER" != "$LXD_USER"  ]; then
+  exec su "$LXD_USER" "$0" "$LXD_IMAGE_OS" "$LXD_IMAGE_RELEASE" "$LXD_IMAGE_ARCH" "$LXD_IMAGE_VARIANT" -- "$@"
+  # nothing is executed beyond that line, because
+  # exec replaces running processes with the new one
+fi
+
+# redirect output to log file:
+sudo mkdir -p /var/log/lxc-ci
+exec 3>&1 4>&2
+trap 'exec 2>&4 1>&3' 0 1 2 3
+exec 1>/var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out 2>&1
+# Everything below will go to the file '/var/log/lxc-ci/os-release-arch-variant.out':
+
+LXD_IMAGE_SERVER_HOST=lxd-image-server
+LXD_IMAGE_VERSION=$(date '+%Y%m%d_%H:%m')
+LXD_IMAGE_PATH="$LXD_IMAGE_OS/$LXD_IMAGE_RELEASE/$LXD_IMAGE_ARCH/$LXD_IMAGE_VARIANT/$LXD_IMAGE_VERSION"
+TMP_DIR=$(mktemp -d)
+
+cd /tmp
+cd "$TMP_DIR"
+mkdir -p "$LXD_IMAGE_PATH"
+
+cd "$LXD_IMAGE_PATH"
+sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
+    -o image.release="$LXD_IMAGE_RELEASE" \
+    -o image.architecture="$LXD_IMAGE_ARCH" \
+    -o image.variant="$LXD_IMAGE_VARIANT" \
+    -o source.url="http://us.archive.ubuntu.com/ubuntu"
+cd "$TMP_DIR"
+
+scp -r "$LXD_IMAGE_PATH/lxd.tar.xz" $LXD_USER@$LXD_IMAGE_SERVER_HOST:/var/www/simplestreams/images/
+scp -r "$LXD_IMAGE_PATH/rootfs.squashfs" $LXD_USER@$LXD_IMAGE_SERVER_HOST:/var/www/simplestreams/images/
+
+cd /tmp
+sudo rm -rf "$TMP_DIR"
