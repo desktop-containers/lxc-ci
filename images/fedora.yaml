@@ -222,19 +222,19 @@ packages:
     - xfce
 
   - packages:
-    - @gnome-desktop
+    - "@gnome-desktop"
     action: install
     variants:
     - gnome
 
   - packages:
-    - @kde-desktop
+    - "@kde-desktop"
     action: install
     variants:
     - kde
 
   - packages:
-    - @xfce-desktop-environment
+    - "@xfce-desktop-environment"
     action: install
     variants:
     - xfce
