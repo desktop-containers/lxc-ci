@@ -18,6 +18,7 @@ fi
 
 # redirect output to log file:
 sudo mkdir -p /var/log/lxc-ci
+sudo rm -f /var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out
 sudo touch /var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out
 sudo chown $LXD_USER /var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out
 exec 3>&1 4>&2
