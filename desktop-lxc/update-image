@@ -36,6 +36,7 @@ cd "$TMP_DIR"
 mkdir -p "$LXD_IMAGE_PATH"
 
 cd "$LXD_IMAGE_PATH"
+echo "$LXD_IMAGE_PATH: Build..."
 sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
     -o image.release="$LXD_IMAGE_RELEASE" \
     -o image.architecture="$LXD_IMAGE_ARCH" \
@@ -43,8 +44,14 @@ sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
     -o source.url="http://us.archive.ubuntu.com/ubuntu"
 cd "$TMP_DIR"
 
-scp -r "$LXD_IMAGE_PATH/lxd.tar.xz" $LXD_USER@$LXD_IMAGE_SERVER_HOST:/var/www/simplestreams/images/
-scp -r "$LXD_IMAGE_PATH/rootfs.squashfs" $LXD_USER@$LXD_IMAGE_SERVER_HOST:/var/www/simplestreams/images/
+echo "$LXD_IMAGE_PATH: Upload..."
+scp -r "$LXD_IMAGE_PATH/lxd.tar.xz" $LXD_USER@$LXD_IMAGE_SERVER_HOST:"/var/www/simplestreams/images/$LXD_IMAGE_PATH/lxd.tar.xz"
+scp -r "$LXD_IMAGE_PATH/rootfs.squashfs" $LXD_USER@$LXD_IMAGE_SERVER_HOST:"/var/www/simplestreams/images/$LXD_IMAGE_PATH/rootfs.squashfs"
 
 cd /tmp
 sudo rm -rf "$TMP_DIR"
+
+echo "$LXD_IMAGE_PATH: Index..."
+ssh $LXD_USER@$LXD_IMAGE_SERVER_HOST lxd-image-server update
+
+echo "$LXD_IMAGE_PATH: Success."
