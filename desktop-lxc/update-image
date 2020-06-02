@@ -18,6 +18,8 @@ fi
 
 # redirect output to log file:
 sudo mkdir -p /var/log/lxc-ci
+sudo touch /var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out
+sudo chown $LXD_USER /var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out
 exec 3>&1 4>&2
 trap 'exec 2>&4 1>&3' 0 1 2 3
 exec 1>/var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out 2>&1
