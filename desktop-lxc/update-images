@@ -1,2 +1,4 @@
 #!/bin/bash
+/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 gnome
+/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 kde
 /lxc-ci/desktop-lxc/update-image ubuntu focal amd64 xfce
