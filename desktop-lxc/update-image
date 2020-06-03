@@ -55,7 +55,7 @@ fi
 cd "$TMP_DIR"
 
 echo "$LXD_IMAGE_PATH: Upload..."
-rsync -r "$TMP_DIR/*" $LXD_USER@$LXD_IMAGE_SERVER_HOST:"/var/www/simplestreams/images/"
+rsync -r "$TMP_DIR/"* $LXD_USER@$LXD_IMAGE_SERVER_HOST:"/var/www/simplestreams/images/"
 
 cd /tmp
 sudo rm -rf "$TMP_DIR"
