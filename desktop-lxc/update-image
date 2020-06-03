@@ -17,7 +17,7 @@ if [ "$USER" != "$LXD_USER"  ]; then
 fi
 
 LXD_IMAGE_SERVER_HOST=lxd-image-server
-LXD_IMAGE_VERSION=$(date '+%Y%m%d_%H:%m')
+LXD_IMAGE_VERSION=$(date '+%Y%m%d_%H:%M')
 LXD_IMAGE_PATH="$LXD_IMAGE_OS/$LXD_IMAGE_RELEASE/$LXD_IMAGE_ARCH/$LXD_IMAGE_VARIANT/$LXD_IMAGE_VERSION"
 TMP_DIR=$(mktemp -d)
 
