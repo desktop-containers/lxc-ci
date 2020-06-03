@@ -1,9 +1,11 @@
 #!/bin/bash
 
+mkdir -p /var/log/lxc-ci
+
 # Ubuntu
-/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 gnome
-/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 kde
-/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 xfce
+/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 gnome > /var/log/lxc-ci/ubuntu-focal-amd64-gnome.log 2>&1
+/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 kde > /var/log/lxc-ci/ubuntu-focal-amd64-kde.log 2>&1
+/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 xfce > /var/log/lxc-ci/ubuntu-focal-amd64-xfce.log 2>&1
 
 # Fedora
 #/lxc-ci/desktop-lxc/update-image fedora 32 amd64 gnome
