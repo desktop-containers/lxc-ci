@@ -1,6 +1,18 @@
 #!/bin/bash
 
-mkdir -p /var/log/lxc-ci
+#
+# Usage:    update-images
+#
+LXD_USER=lxdadm
+
+if [ "$USER" != "$LXD_USER"  ]; then
+  exec su "$LXD_USER" "$0" -- "$@"
+  # nothing is executed beyond that line, because
+  # exec replaces running processes with the new one
+fi
+
+sudo mkdir -p /var/log/lxc-ci
+sudo chown -R "$LXD_USER":"$LXD_USER" /var/log/lxc-ci
 
 # Ubuntu
 /lxc-ci/desktop-lxc/update-image ubuntu focal amd64 gnome > /var/log/lxc-ci/ubuntu-focal-amd64-gnome.log 2>&1
@@ -10,4 +22,4 @@ mkdir -p /var/log/lxc-ci
 # Fedora
 /lxc-ci/desktop-lxc/update-image fedora 32 amd64 gnome > /var/log/lxc-ci/fedora-32-amd64-gnome.log 2>&1
 /lxc-ci/desktop-lxc/update-image fedora 32 amd64 kde > /var/log/lxc-ci/fedora-32-amd64-kde.log 2>&1
-#/lxc-ci/desktop-lxc/update-image fedora 32 amd64 xfce
+/lxc-ci/desktop-lxc/update-image fedora 32 amd64 xfce > /var/log/lxc-ci/fedora-32-amd64-xfce.log 2>&1
