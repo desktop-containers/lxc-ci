@@ -526,7 +526,7 @@ actions:
     set -eux
 
     # elementary OS Juno STABLE
-    ENV DEBIAN_FRONTEND=noninteractive
+    export DEBIAN_FRONTEND=noninteractive
 
     apt -y install software-properties-common
     add-apt-repository -u -y ppa:elementary-os/os-patches
@@ -547,7 +547,7 @@ actions:
     set -eux
 
     # elementary OS Odin UNSTABLE
-    ENV DEBIAN_FRONTEND=noninteractive
+    export DEBIAN_FRONTEND=noninteractive
 
     apt -y install software-properties-common
     add-apt-repository -u -y ppa:elementary-os/os-patches
