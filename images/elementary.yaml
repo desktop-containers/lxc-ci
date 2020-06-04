@@ -501,14 +501,14 @@ actions:
     ENV DEBIAN_FRONTEND=noninteractive
 
     apt -y install software-properties-common
-	add-apt-repository -u -y ppa:elementary-os/os-patches
-	add-apt-repository -u -y ppa:elementary-os/stable
-	apt install -y elementary-os-overlay
-	apt update
-	apt -y dist-upgrade
-	apt install --no-install-recommends -y elementary-sdk
-	apt -y autoremove
-	apt autoclean
+    add-apt-repository -u -y ppa:elementary-os/os-patches
+    add-apt-repository -u -y ppa:elementary-os/stable
+    apt install -y elementary-os-overlay
+    apt update
+    apt -y dist-upgrade
+    apt install --no-install-recommends -y elementary-sdk
+    apt -y autoremove
+    apt autoclean
   variants:
   - cloud
   - stable
@@ -522,14 +522,14 @@ actions:
     ENV DEBIAN_FRONTEND=noninteractive
 
     apt -y install software-properties-common
-	add-apt-repository -u -y ppa:elementary-os/os-patches
-	add-apt-repository -u -y ppa:elementary-os/daily
-	apt install -y elementary-os-overlay
-	apt update
-	apt -y dist-upgrade
-	apt install --no-install-recommends -y elementary-sdk
-	apt -y autoremove
-	apt autoclean
+    add-apt-repository -u -y ppa:elementary-os/os-patches
+    add-apt-repository -u -y ppa:elementary-os/daily
+    apt install -y elementary-os-overlay
+    apt update
+    apt -y dist-upgrade
+    apt install --no-install-recommends -y elementary-sdk
+    apt -y autoremove
+    apt autoclean
   variants:
   - daily
 
