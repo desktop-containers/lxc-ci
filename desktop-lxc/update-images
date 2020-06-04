@@ -14,12 +14,19 @@ fi
 sudo mkdir -p /var/log/lxc-ci
 sudo chown -R "$LXD_USER":"$LXD_USER" /var/log/lxc-ci
 
-# Ubuntu
-/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 gnome > /var/log/lxc-ci/ubuntu-focal-amd64-gnome.log 2>&1
-/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 kde > /var/log/lxc-ci/ubuntu-focal-amd64-kde.log 2>&1
-/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 xfce > /var/log/lxc-ci/ubuntu-focal-amd64-xfce.log 2>&1
+# elementary OS
+/lxc-ci/desktop-lxc/update-image elementary bionic amd64 cloud > /var/log/lxc-ci/elementary-bionic-amd64-cloud.log 2>&1
+/lxc-ci/desktop-lxc/update-image elementary bionic amd64 stable > /var/log/lxc-ci/elementary-bionic-amd64-stable.log 2>&1
+/lxc-ci/desktop-lxc/update-image elementary focal amd64 daily > /var/log/lxc-ci/elementary-focal-amd64-daily.log 2>&1
 
 # Fedora
 /lxc-ci/desktop-lxc/update-image fedora 32 amd64 gnome > /var/log/lxc-ci/fedora-32-amd64-gnome.log 2>&1
 /lxc-ci/desktop-lxc/update-image fedora 32 amd64 kde > /var/log/lxc-ci/fedora-32-amd64-kde.log 2>&1
 /lxc-ci/desktop-lxc/update-image fedora 32 amd64 xfce > /var/log/lxc-ci/fedora-32-amd64-xfce.log 2>&1
+
+# Ubuntu
+/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 gnome > /var/log/lxc-ci/ubuntu-focal-amd64-gnome.log 2>&1
+/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 kde > /var/log/lxc-ci/ubuntu-focal-amd64-kde.log 2>&1
+/lxc-ci/desktop-lxc/update-image ubuntu focal amd64 xfce > /var/log/lxc-ci/ubuntu-focal-amd64-xfce.log 2>&1
+
+

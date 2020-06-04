@@ -27,13 +27,7 @@ mkdir -p "$LXD_IMAGE_PATH"
 
 cd "$LXD_IMAGE_PATH"
 echo "$LXD_IMAGE_PATH: Build..."
-if [ "$LXD_IMAGE_OS" = "ubuntu" ]; then
-    sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
-        -o image.release="$LXD_IMAGE_RELEASE" \
-        -o image.architecture="$LXD_IMAGE_ARCH" \
-        -o image.variant="$LXD_IMAGE_VARIANT" \
-        -o source.url="http://us.archive.ubuntu.com/ubuntu"
-else
+if [ "$LXD_IMAGE_OS" = "fedora" ]; then
     ARCH=${LXD_IMAGE_ARCH}
     [ "${ARCH}" = "amd64" ] && ARCH="x86_64"
 
@@ -41,6 +35,12 @@ else
         -o image.release="$LXD_IMAGE_RELEASE" \
         -o image.architecture="$ARCH" \
         -o image.variant="$LXD_IMAGE_VARIANT"
+else
+    sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
+        -o image.release="$LXD_IMAGE_RELEASE" \
+        -o image.architecture="$LXD_IMAGE_ARCH" \
+        -o image.variant="$LXD_IMAGE_VARIANT" \
+        -o source.url="http://us.archive.ubuntu.com/ubuntu"
 fi
 cd "$TMP_DIR"
 
