@@ -16,18 +16,8 @@ if [ "$USER" != "$LXD_USER"  ]; then
   # exec replaces running processes with the new one
 fi
 
-# redirect output to log file:
-sudo mkdir -p /var/log/lxc-ci
-sudo rm -f /var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out
-sudo touch /var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out
-sudo chown $LXD_USER /var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out
-exec 3>&1 4>&2
-trap 'exec 2>&4 1>&3' 0 1 2 3
-exec 1>/var/log/lxc-ci/$LXD_IMAGE_OS-$LXD_IMAGE_RELEASE-$LXD_IMAGE_ARCH-$LXD_IMAGE_VARIANT.out 2>&1
-# Everything below will go to the file '/var/log/lxc-ci/os-release-arch-variant.out':
-
 LXD_IMAGE_SERVER_HOST=lxd-image-server
-LXD_IMAGE_VERSION=$(date '+%Y%m%d_%H:%m')
+LXD_IMAGE_VERSION=$(date '+%Y%m%d_%H:%M')
 LXD_IMAGE_PATH="$LXD_IMAGE_OS/$LXD_IMAGE_RELEASE/$LXD_IMAGE_ARCH/$LXD_IMAGE_VARIANT/$LXD_IMAGE_VERSION"
 TMP_DIR=$(mktemp -d)
 
@@ -55,7 +45,7 @@ fi
 cd "$TMP_DIR"
 
 echo "$LXD_IMAGE_PATH: Upload..."
-rsync -r "$TMP_DIR/*" $LXD_USER@$LXD_IMAGE_SERVER_HOST:"/var/www/simplestreams/images/"
+rsync -r "$TMP_DIR/"* $LXD_USER@$LXD_IMAGE_SERVER_HOST:"/var/www/simplestreams/images/"
 
 cd /tmp
 sudo rm -rf "$TMP_DIR"
