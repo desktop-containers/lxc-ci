@@ -532,7 +532,8 @@ actions:
     add-apt-repository -u -y ppa:elementary-os/os-patches
     add-apt-repository -u -y ppa:elementary-os/stable
     apt install -y elementary-os-overlay
-    apt update
+    apt-get clean
+    apt-get update --option Acquire::ForceIPv4=true --option Acquire::Retries=100 --option Acquire::http::Timeout=60
     apt -y dist-upgrade
     apt install --no-install-recommends -y elementary-sdk
     apt -y autoremove
@@ -553,7 +554,8 @@ actions:
     add-apt-repository -u -y ppa:elementary-os/os-patches
     add-apt-repository -u -y ppa:elementary-os/daily
     apt install -y elementary-os-overlay
-    apt update
+    apt-get clean
+    apt-get update --option Acquire::ForceIPv4=true --option Acquire::Retries=100 --option Acquire::http::Timeout=60
     apt -y dist-upgrade
     apt install --no-install-recommends -y elementary-sdk
     apt -y autoremove
