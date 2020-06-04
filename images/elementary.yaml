@@ -497,6 +497,9 @@ actions:
     #!/bin/sh
     set -eux
 
+    # elementary OS Juno STABLE
+    ENV DEBIAN_FRONTEND=noninteractive
+
     apt -y install software-properties-common
 	add-apt-repository -u -y ppa:elementary-os/os-patches
 	add-apt-repository -u -y ppa:elementary-os/stable
@@ -515,6 +518,9 @@ actions:
     #!/bin/sh
     set -eux
 
+    # elementary OS Odin UNSTABLE
+    ENV DEBIAN_FRONTEND=noninteractive
+
     apt -y install software-properties-common
 	add-apt-repository -u -y ppa:elementary-os/os-patches
 	add-apt-repository -u -y ppa:elementary-os/daily
@@ -525,7 +531,6 @@ actions:
 	apt -y autoremove
 	apt autoclean
   variants:
-  - cloud
   - daily
 
 - trigger: post-packages
