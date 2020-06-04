@@ -492,47 +492,6 @@ actions:
   variants:
   - default
 
-- trigger: post-update
-  action: |-
-    #!/bin/sh
-    set -eux
-
-    # elementary OS Juno STABLE
-    ENV DEBIAN_FRONTEND=noninteractive
-
-    apt -y install software-properties-common
-    add-apt-repository -u -y ppa:elementary-os/os-patches
-    add-apt-repository -u -y ppa:elementary-os/stable
-    apt install -y elementary-os-overlay
-    apt update
-    apt -y dist-upgrade
-    apt install --no-install-recommends -y elementary-sdk
-    apt -y autoremove
-    apt autoclean
-  variants:
-  - cloud
-  - stable
-
-- trigger: post-update
-  action: |-
-    #!/bin/sh
-    set -eux
-
-    # elementary OS Odin UNSTABLE
-    ENV DEBIAN_FRONTEND=noninteractive
-
-    apt -y install software-properties-common
-    add-apt-repository -u -y ppa:elementary-os/os-patches
-    add-apt-repository -u -y ppa:elementary-os/daily
-    apt install -y elementary-os-overlay
-    apt update
-    apt -y dist-upgrade
-    apt install --no-install-recommends -y elementary-sdk
-    apt -y autoremove
-    apt autoclean
-  variants:
-  - daily
-
 - trigger: post-packages
   action: |-
     #!/bin/sh
@@ -560,6 +519,47 @@ actions:
 
     # Cleanup temporary shadow paths
     rm /etc/*-
+
+- trigger: post-packages
+  action: |-
+    #!/bin/sh
+    set -eux
+
+    # elementary OS Juno STABLE
+    ENV DEBIAN_FRONTEND=noninteractive
+
+    apt -y install software-properties-common
+    add-apt-repository -u -y ppa:elementary-os/os-patches
+    add-apt-repository -u -y ppa:elementary-os/stable
+    apt install -y elementary-os-overlay
+    apt update
+    apt -y dist-upgrade
+    apt install --no-install-recommends -y elementary-sdk
+    apt -y autoremove
+    apt autoclean
+  variants:
+  - cloud
+  - stable
+
+- trigger: post-packages
+  action: |-
+    #!/bin/sh
+    set -eux
+
+    # elementary OS Odin UNSTABLE
+    ENV DEBIAN_FRONTEND=noninteractive
+
+    apt -y install software-properties-common
+    add-apt-repository -u -y ppa:elementary-os/os-patches
+    add-apt-repository -u -y ppa:elementary-os/daily
+    apt install -y elementary-os-overlay
+    apt update
+    apt -y dist-upgrade
+    apt install --no-install-recommends -y elementary-sdk
+    apt -y autoremove
+    apt autoclean
+  variants:
+  - daily
 
 - trigger: post-files
   action: |-
