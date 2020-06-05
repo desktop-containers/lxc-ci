@@ -15,9 +15,10 @@ sudo mkdir -p /var/log/lxc-ci
 sudo chown -R "$LXD_USER":"$LXD_USER" /var/log/lxc-ci
 
 # elementary OS
-/lxc-ci/desktop-lxc/update-image elementary bionic amd64 cloud > /var/log/lxc-ci/elementary-bionic-amd64-cloud.log 2>&1
-/lxc-ci/desktop-lxc/update-image elementary bionic amd64 stable > /var/log/lxc-ci/elementary-bionic-amd64-stable.log 2>&1
-/lxc-ci/desktop-lxc/update-image elementary focal amd64 daily > /var/log/lxc-ci/elementary-focal-amd64-daily.log 2>&1
+/lxc-ci/desktop-lxc/update-image elementary hera amd64 cloud > /var/log/lxc-ci/elementary-hera-amd64-cloud.log 2>&1
+/lxc-ci/desktop-lxc/update-image elementary hera amd64 stable > /var/log/lxc-ci/elementary-hera-amd64-stable.log 2>&1
+/lxc-ci/desktop-lxc/update-image elementary odin amd64 cloud > /var/log/lxc-ci/elementary-odin-amd64-cloud.log 2>&1
+/lxc-ci/desktop-lxc/update-image elementary odin amd64 daily > /var/log/lxc-ci/elementary-odin-amd64-daily.log 2>&1
 
 # Fedora
 /lxc-ci/desktop-lxc/update-image fedora 32 amd64 gnome > /var/log/lxc-ci/fedora-32-amd64-gnome.log 2>&1
