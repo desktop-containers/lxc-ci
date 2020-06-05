@@ -634,5 +634,14 @@ actions:
   types:
   - vm
 
+- trigger: post-files
+  action: |-
+    #!/bin/sh
+    set -eux
+
+    # Avoid regenartion of apt sources.list
+    # by cloud-init upon first boot:
+    echo "apt:\n  preserve_sources_list: true" >> /etc/cloud/cloud.cfg
+
 mappings:
   architecture_map: debian
