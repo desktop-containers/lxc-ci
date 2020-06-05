@@ -4,7 +4,6 @@ image:
 source:
   downloader: debootstrap
   same_as: gutsy
-  suite: bionic
   url: http://archive.ubuntu.com/ubuntu
   
   keys:
