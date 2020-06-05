@@ -39,7 +39,7 @@ if [ "$LXD_IMAGE_OS" = "elementary" ]; then
         -o image.variant="$LXD_IMAGE_VARIANT" \
         -o source.suite="$SUITE"
 
-else if [ "$LXD_IMAGE_OS" = "fedora" ]; then
+elif [ "$LXD_IMAGE_OS" = "fedora" ]; then
     ARCH=${LXD_IMAGE_ARCH}
     [ "${ARCH}" = "amd64" ] && ARCH="x86_64"
 
