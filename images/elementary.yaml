@@ -482,7 +482,8 @@ packages:
     - ppc64el
 
   - name: appcenter.list
-    url: deb http://packages.elementary.io/appcenter {{ source.suite }} main
+    # url: deb http://packages.elementary.io/appcenter {{ source.suite }} main
+    url: deb http://packages.elementary.io/appcenter bionic main
     key: |-
       -----BEGIN PGP PUBLIC KEY BLOCK-----
       Version: GnuPG v1
