@@ -27,7 +27,19 @@ mkdir -p "$LXD_IMAGE_PATH"
 
 cd "$LXD_IMAGE_PATH"
 echo "$LXD_IMAGE_PATH: Build..."
-if [ "$LXD_IMAGE_OS" = "fedora" ]; then
+
+if [ "$LXD_IMAGE_OS" = "elementary" ]; then
+    SUITE=${LXD_IMAGE_RELEASE}
+    [ "${SUITE}" = "hera" ] && SUITE="bionic"
+    [ "${SUITE}" = "odin" ] && SUITE="focal"
+
+    sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
+        -o image.release="$LXD_IMAGE_RELEASE" \
+        -o image.architecture="$ARCH" \
+        -o image.variant="$LXD_IMAGE_VARIANT" \
+        -o source.suite="$SUITE"
+
+else if [ "$LXD_IMAGE_OS" = "fedora" ]; then
     ARCH=${LXD_IMAGE_ARCH}
     [ "${ARCH}" = "amd64" ] && ARCH="x86_64"
 
@@ -35,6 +47,7 @@ if [ "$LXD_IMAGE_OS" = "fedora" ]; then
         -o image.release="$LXD_IMAGE_RELEASE" \
         -o image.architecture="$ARCH" \
         -o image.variant="$LXD_IMAGE_VARIANT"
+
 else
     sudo ~/go/bin/distrobuilder build-lxd /lxc-ci/images/"$LXD_IMAGE_OS".yaml \
         -o image.release="$LXD_IMAGE_RELEASE" \
